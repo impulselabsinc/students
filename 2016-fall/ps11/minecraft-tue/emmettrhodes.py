@@ -1,8 +1,43 @@
-import mcpi.minecraft as mincraft
-import mcpi.block as block
+import mcpi.mincraft as mincraft
+import mvpi.block as bloack
+mc=mincraft.minecraft.create()
 tnt=block.TNT_EXPLODING
-mc=minecraft.Minecraft.creat()
-pos=mc.player.getTilePose()
-x=pos.x+1
-y=pos.yz=pos.z+1
-mc.setBlock9x,y,z,tnt
+pos=mc.player.gettilepos()
+x=pos.x + 1
+y=pos.y
+z=pos.z + 1
+mc.setblock(x,y,z, tnt)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
