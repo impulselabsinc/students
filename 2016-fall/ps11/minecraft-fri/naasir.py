@@ -1,19 +1,8 @@
 import mcpi.minecraft as minecraft
 import mcpi.block as block
 
-mc = minecraft.Minecraft.create()
-tnt = block.TNT_EXPLODING
-pos = mc.player.getTilePos()
-x = pos.x + 1
-y = pos.y
-z = pos.z + 1
+mc =minecraft.Minecraft.create()
+myBlock = block.WATER_FLOWING
 
-
-mc.setBlock(x, y, z, tnt)
-
-
-
-
-
-
-
+myPosition = mc.player.getTilePos()
+mc.setBlock(myPosition.x+1, myPosition. y+1, myPosition.z, myBlock)
