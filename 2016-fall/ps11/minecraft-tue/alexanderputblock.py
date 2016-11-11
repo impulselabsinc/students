@@ -1,8 +1,11 @@
 import mcpi.minecraft as minecraft
+
 import mcpi.block as block
 
+
 mc = minecraft.Minecraft.create()
-myBlock = block.COBWEB
+
+myBlock = block.WOOL_LIME
 
 
 myPosition = mc.player.getTilePos()
