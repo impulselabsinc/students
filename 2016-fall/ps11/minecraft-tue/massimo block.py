@@ -1,12 +1,8 @@
-
 import mcpi.minecraft as minecraft
 import mcpi.block as block
 
 mc = minecraft.Minecraft.create()
-myblock = block.WATER_STATIONARY
-pos = mc.player.getTilePos()
-x = pos.x + 1
-y = pos.y
-z = pos.z + 1
+myBlock = block.WATER_STATIONARY
 
+myPosition = mc.player.getTilePos()
 mc.setBlocks(x, y, z, x+11, y+11, z+11, myblock)
