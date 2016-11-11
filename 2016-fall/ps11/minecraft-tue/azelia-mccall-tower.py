@@ -2,10 +2,10 @@ import mcpi.minecraft as minecraft
 import mcpi.block as block
 
 mc= minecraft.Minecraft.create()
-myblock = block.GOLD_ORE
+myblock = block.WOOL_LIME
 pos = mc.player.getTilePos()
-x = pos.x + 1
+x = pos.x + 0
 y = pos.y
-z = pos.z + 1
+z = pos.z + 0
 
-mc.setBlocks(x,y,z, +11,y+11, z+11, myblock) 
+mc.setBlocks(x,y,z, +11,y+11, z+11, myblock)
