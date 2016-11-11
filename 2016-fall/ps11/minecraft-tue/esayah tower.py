@@ -2,7 +2,9 @@ import mcpi.minecraft as minecraft
 import mcpi.block as block
 
 mc = minecraft.Minecraft.create()
-myblock = block.END_PORTAL
+myblock = block.TNT_EXPLODING
+
+
 
 pos = mc.player.getTilePos()
 x =pos.x + 1
