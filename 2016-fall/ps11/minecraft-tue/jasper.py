@@ -1,21 +1,19 @@
-import mcpi.mincraft as MINCRCRAFT
+import mcpi.mincraft as minecraft
 import mcpi.block as block
 
 
-mc = mincraft.mincraft.create[]
+mc = mincraft.mincraft.create()
 
 
-tnt = block.TNT EXPLODING
+tnt = block.TNT_EXPLODING
 
-pos = mc.player.getTilePos[]
+pos = mc.player.getTilePos()
 
 X= pos.x + 1
 
 y = pos.y
 
-z = .z + 1
+z = pos.z + 1
 
 
-MC.setBlock[X, Y, z,
-
-
+mc.setBlock(x, y, z, tnt)
