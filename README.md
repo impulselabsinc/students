@@ -14,7 +14,7 @@ _Always do this before you do anything else_
 git pull
 ```
 
-Add files that you have created or changed to github
+Add files that you have created or changed to github.
 _Adding a dot (.) will add all the files in that directory to github_
 ```sh
 git add /path/to/file.py
