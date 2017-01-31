@@ -8,13 +8,14 @@ cd ~/impulselabs/students/2017/coop/
 cd ~/impulselabs/students/2017/ps11/
 ```
 
-Pull down the latest changes. `Always do this before you do anything else`
+Pull down the latest changes. 
+_Always do this before you do anything else_
 ```sh
 git pull
 ```
 
 Add files that you have created or changed to github
-`Adding a dot (.) will add all the files in that directory to github`
+_Adding a dot (.) will add all the files in that directory to github_
 ```sh
 git add /path/to/file.py
 git add /path/to/all/files/in/folder/.
@@ -35,4 +36,14 @@ Check the status of all your files
 This will show you which files have been added but not pushed and files that have not yet been committed
 ```sh
 git status
+```
+
+This is what I would do, altogether now
+```sh
+git pull
+cd ~/impulselabsinc/students/2017/ps11/
+git add myPythonFile.py
+git commit -m "added my python file that does something cool"
+git push
+
 ```
