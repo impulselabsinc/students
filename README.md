@@ -8,8 +8,7 @@ cd ~/impulselabs/students/2017/coop/
 cd ~/impulselabs/students/2017/ps11/
 ```
 
-Pull down the latest changes
-`Always do this before you do anything else`
+Pull down the latest changes. `Always do this before you do anything else`
 ```sh
 git pull
 ```
