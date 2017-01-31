@@ -40,8 +40,8 @@ git status
 
 This is what I would do, altogether now
 ```sh
-git pull
 cd ~/impulselabsinc/students/2017/ps11/
+git pull
 git add myPythonFile.py
 git commit -m "added my python file that does something cool"
 git push
