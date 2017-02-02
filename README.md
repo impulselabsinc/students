@@ -72,7 +72,7 @@ git config user.name "imp2"
 
 If you experience the following error, it is because there is a missing e-mail configuration
 ```sh
-fatal: empty ident name (for <pi@raspberrypi.(none)>) not allowed
+fatal: unable to auto-detect email address (got 'pi@raspberrypi.(none)')
 ```
 
 You can fix this error by using the following command to add an e-mail address
