@@ -1,6 +1,17 @@
 # students
 
-## Pull down latest changes
+## Using the Terminal
+You can launch the terminal from the Raspberry Pi menu on the top left and going into 'Accessories'
+
+Here are a list of useful commands that you can use within the terminal(_Remember that all linux commands are in lower caser_)
+```sh
+# You can see who you are logged in as 
+whoami
+
+# The folder you are currently in is called your 'working directory'. To see which directory this is type in the '**p**rint **w**orking **d**irectory command'
+```
+
+## Using Git 
 
 Change into the folder where all your files are stored
 ```sh
