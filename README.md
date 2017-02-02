@@ -3,12 +3,60 @@
 ## Using the Terminal
 You can launch the terminal from the Raspberry Pi menu on the top left and going into 'Accessories'
 
-Here are a list of useful commands that you can use within the terminal(_Remember that all linux commands are in lower caser_)
+Here are a list of useful commands that you can use within the terminal(_Linux commands are always all lower case_)
 ```sh
 # You can see who you are logged in as 
 whoami
 
-# The folder you are currently in is called your 'working directory'. To see which directory this is type in the '**p**rint **w**orking **d**irectory command'
+# The directory you are currently in is called your 'working directory'. The 'print working directory' shows you where you are.
+# 'Directory' is another word for 'folder'
+pwd
+
+# To list the contents of your working directory
+ls
+
+# To list the contents of your working directory in long format use the following command
+# Any line that begins with a 'd' is a directory
+# Any line that begins with a '-' is a file
+# Any line that begins with a 'l' is a link to another file or directory
+ls -l
+
+# To list hidden files or directories in your working directory
+# Hidden files and folders begin with a dot '.' in front of their names
+ls -al
+
+# Every directory always has at least 2 hidden directories
+# A single dot '.' is the reference to the directory itself
+# Two dots '..' represent the directory that is one level up
+# So if I am in this directory - /buttons/blue/ and I do an 'ls -al'
+# '.' will refer to the directory called 'blue' 
+# '..' will refer to the directory called 'buttons'
+# A directory path is the name of all the directories and sub-directories separated by a forward slash '/'
+# All directory paths always begin with a forward slash '/'
+# This is the starting directory on Linux computers and is also called the 'root' directory
+# There are no directories above the root directory
+
+# To list files and directories in the root directory, use 
+ls -al /
+
+# To list the files and directories in a specific folder add the name of the directory at the end of the list command 
+ls -al /buttons/blue/
+
+# To change your working directory use the change directory command
+# If I want to change to the root directory I can use 
+cd /
+
+# If I want to change to any directory add the name of that directory to the end of the cd command
+cd /buttons/red/
+
+# You can also change to a directory one level up by using
+cd ..
+
+# Two levels up
+cd ../..
+
+# And so one
+cd ../../..
 ```
 
 ## Using Git 
