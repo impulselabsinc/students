@@ -55,8 +55,31 @@ cd ..
 # Two levels up
 cd ../..
 
-# And so one
+# And so on
 cd ../../..
+
+# To copy a file use the copy command
+cp redButton.py redButtonCopy.py
+
+# To copy a file to a different directory 
+# These commands will create copies so you will have the same file in 2 locations
+cp /buttons/blue/redButton.py /buttons/red/
+
+# To move a file use the move command
+# The move command removes the file from the original location 
+mv /buttons/blue/redButton.py /buttons/red/
+
+# You can also use the move command to rename a file or directory 
+mv redFile.py betterRedFile.py
+
+# You can move and rename a file at the same time
+mv /buttons/blue/redButton.py /buttons/red/newRedButton.py
+
+# To delete a file use the remove command
+rm myBadFile.py
+
+# To delete a directory you can use the remove command with -r
+rm -r folderName
 ```
 
 ## Using Git 
