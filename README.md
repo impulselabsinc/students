@@ -38,12 +38,25 @@ This will show you which files have been added but not pushed and files that hav
 git status
 ```
 
-This is what I would do, altogether now
+This is what I would do to create a directory calld toot where I can also save code Minecraft
 ```sh
 cd ~/impulselabsinc/students/2017/ps11/
 git pull
+mkdir toot
+cd toot
+ln -s ../../../mcpi mcpi
+git add .
+git commit -m "created a new folder calld toot"
+git push
+
+```
+
+This is what I would do to push a file called myPythonFile.py up to Github
+```sh
+cd ~/impulselabsinc/students/2017/ps11/toot/
 git add myPythonFile.py
 git commit -m "added my python file that does something cool"
 git push
 
 ```
+
