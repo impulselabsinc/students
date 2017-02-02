@@ -60,3 +60,22 @@ git push
 
 ```
 
+If you experience the following error, it is because there is a missing name configuration
+```sh
+fatal: empty ident name (for <pi@raspberrypi.(none)>) not allowed
+```
+
+You can fix this error by using the following command to add a name
+```sh
+git config user.name "imp2"
+```
+
+If you experience the following error, it is because there is a missing e-mail configuration
+```sh
+fatal: empty ident name (for <pi@raspberrypi.(none)>) not allowed
+```
+
+You can fix this error by using the following command to add an e-mail address
+```sh
+git config user.email "imp2@impulselabs.io"
+```
