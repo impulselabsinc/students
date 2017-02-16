@@ -180,7 +180,7 @@ currentPosition = mc.player.getTilePos()
 #mc.setBlocks(currentPosition.x+5,  currentPosition.y,  currentPosition.z,  currentPosition.x+15,  currentPosition.y+10  ,currentPosition.z  ,block.GOLD_ORE.id )
 #mc.setBlocks(currentPosition.x+5,  currentPosition.y,  currentPosition.z+10,  currentPosition.x+15,  currentPosition.y+10  ,currentPosition.z+10  ,block.GOLD_ORE.id )
 #mc.setBlocks(currentPosition.x+5,  currentPosition.y,  currentPosition.z,  currentPosition.x+5,  currentPosition.y+10  ,currentPosition.z+10  ,block.GOLD_ORE.id )
-#mc.setBlocks(currentPosition.x+15,  currentPosition.y,  currentPosition.z,  currentPosition.x+15,  currentPosition.y+10  ,currentPosition.z  ,block.GOLD_ORE.id )
+#mc.setBlocks(currentPosition.x+15,  currentPosition.y,  currentPosition.z,  currentPosition.x+15,  currentPosition.y+10  ,currentPosition.z+10  ,block.GOLD_ORE.id )
 #UNCOMMENT THE LINES ABOVE THIS(DELETE THE HASHTAG)
 
 ##Can you figure out how to add a roof?
