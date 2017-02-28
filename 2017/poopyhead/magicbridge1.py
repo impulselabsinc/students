@@ -9,9 +9,9 @@ print ("x = " + str(pos.x))
 print ("y = " + str(pos.y))
 print ("z = " + str(pos.z))
 
-standingon = mc.getBlock(pos.x, pos.y - 1, pos.z)
+myBlock = mc.getBlock(pos.x, pos.y - 1, pos.z)
 
-if standingon == block.AIR:
+if myBlock == block.AIR:
     print("Not safe!")
     mc.postToChat("Not safe!")
 else:
