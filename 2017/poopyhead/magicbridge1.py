@@ -15,5 +15,5 @@ if myBlock == block.AIR:
     print("Not safe!")
     mc.postToChat("Not safe!")
 else:
-    print("Safe!")
-    mc.postToChat("Safe")
+    print("Safe.")
+    mc.postToChat("Safe.")
