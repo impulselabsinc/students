@@ -3,7 +3,7 @@ import mcpi.block as block
 
 mc = minecraft.Minecraft.create()
 
-pos = mc.player.getPos()
+pos = mc.player.getTilePos()
 
 print ("x = " + str(pos.x))
 print ("y = " + str(pos.y))
