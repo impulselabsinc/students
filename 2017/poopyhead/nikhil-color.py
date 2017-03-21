@@ -13,3 +13,5 @@ while True:
             hitBlock = mc.getBlockWithData(hit.pos.x, hit.pos.y, hit.pos.z)
             mc.setBlock(hit.pos.x, hit.pos.y, hit.pos.z, block.WOOL.id, random.randint(0,15))
     time.sleep(0.1)
+
+
