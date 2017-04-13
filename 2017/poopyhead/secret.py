@@ -1,4 +1,8 @@
-from appJar import gui
+try:
+    from appJar import gui
+except ImportError:
+    sys.exit(""" You need to install appJar! Please run the following command -
+                pip install appJar""")
 
 def okay(btn):
     app.stop()
