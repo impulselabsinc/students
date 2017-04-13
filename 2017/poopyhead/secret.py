@@ -4,7 +4,7 @@ try:
 except ImportError:
     print "Trying to Install required module: appJar\n"
     import pip
-    pip.main(['install', 'appJar'])
+    pip.main(['install',  '--user', 'appJar'])
     from appJar import gui
 
 def okay(btn):
