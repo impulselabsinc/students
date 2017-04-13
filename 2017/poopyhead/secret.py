@@ -1,4 +1,3 @@
-import os
 try:
     from appJar import gui
 except ImportError:
@@ -7,11 +6,8 @@ except ImportError:
     pip.main(['install',  '--user', 'appJar'])
     from appJar import gui
 
-def okay(btn):
-    app.stop()
-    
 def press(btn):
-    if btn=="Cancel":
+    if btn=="Cancel" or btn=="ok":
         app.stop()
     else:
         user = app.getEntry('user')
@@ -21,7 +17,7 @@ def press(btn):
         app.removeAllWidgets()
         app.addLabel("title", "Hello " + user, 0, 0, 2)
         app.addLabel("subtitle", "Your password is '" + pwd + "'", 2, 0, 2)
-        app.addButtons(["Submit"], okay, 3, 0, 2)
+        app.addButtons(["ok"], press, 3, 0, 2)
         
 app = gui()
 
