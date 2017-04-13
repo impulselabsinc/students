@@ -1,8 +1,11 @@
+import os
 try:
     from appJar import gui
 except ImportError:
-    sys.exit(""" You need to install appJar! Please run the following command -
-                pip install appJar""")
+    print "Trying to Install required module: appJar\n"
+    import pip
+    pip.main(['install', 'appJar'])
+    from appJar import gui
 
 def okay(btn):
     app.stop()
