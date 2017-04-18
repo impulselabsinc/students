@@ -44,7 +44,7 @@ class CustomHandler(FileSystemEventHandler):
 
 class App(object):
     def __init__(self):
-        path = sys.argv[1] if len(sys.argv) > 1 else "./tmp"
+        path = sys.argv[1] if len(sys.argv) > 1 else "./messages"
         handler = CustomHandler(self)
         self.observer = Observer()
         self.observer.schedule(handler, path, recursive=False)
