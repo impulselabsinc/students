@@ -118,7 +118,7 @@ class App(object):
                 parts = line.split(":")
                 if len(parts) == 3:
                     myName = parts[0].strip()
-                    myMsg = parts[1]
+                    myMsg = parts[1].strip()
                     myTag = parts[2].strip()
                 elif len(parts) == 2:
                     myName = parts[0]
@@ -148,7 +148,7 @@ class App(object):
                 self.lineNumber = self.lineNumber + 1
                 
                 
-                if myTag == "yellow" or myTag == "green" or myTag == "blue" or myTag == "orange" or myTag == "pink" or myTag == "cyan" or myTag == "brown" or myTag == "aquamarine" or myTag == "purple" or myTag == "honeydew":
+                if myTag == "white" or myTag == "yellow" or myTag == "green" or myTag == "blue" or myTag == "orange" or myTag == "pink" or myTag == "cyan" or myTag == "brown" or myTag == "aquamarine" or myTag == "purple" or myTag == "honeydew":
                     self.text.insert("end", myName + " > " + myMsg + "\n")
                     self.text.tag_add(myTag, str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(len(myName)))
                 elif myTag == "rainbow":
