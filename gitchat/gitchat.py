@@ -121,7 +121,7 @@ class App(object):
                 if len(parts) == 3:
                     myName = parts[0].strip()
                     myMsg = parts[1].strip()
-                    myTag = parts[2].strip()
+                    myTag = parts[2].strip().lower()
                 elif len(parts) == 2:
                     myName = parts[0]
                     myMsg = parts[1]
