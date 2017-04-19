@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 
+"""
+Gitchat.py: Teaches children about using git
+Watches for new and modified files under the 'messages' subdirectory
+Any new or modified contents are published to the GUI
 
+"""
+
+import sys
 import Tkinter as tk
 from tkFont import Font
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-
 from Queue import Queue
-import sys
 from PIL import Image, ImageTk
 
 class CustomHandler(FileSystemEventHandler):
@@ -112,21 +117,21 @@ class App(object):
         self.images = {}
         
         basewidth = 32
-        buf = Image.open('./messages/emojis/creeper.gif')
+        buf = Image.open('./emojis/creeper.gif')
         wpercent = (basewidth/float(buf.size[0]))
         hsize = int((float(buf.size[1])*float(wpercent)))
         buf = buf.resize((basewidth,hsize), Image.ANTIALIAS)
         self.images['creeper'] = ImageTk.PhotoImage(buf)
 
         basewidth = 32
-        buf = Image.open('./messages/emojis/poo.gif')
+        buf = Image.open('./emojis/poo.gif')
         wpercent = (basewidth/float(buf.size[0]))
         hsize = int((float(buf.size[1])*float(wpercent)))
         buf = buf.resize((basewidth,hsize), Image.ANTIALIAS)
         self.images['poo'] = ImageTk.PhotoImage(buf)
 
         basewidth = 32
-        buf = Image.open('./messages/emojis/happy.gif')
+        buf = Image.open('./emojis/happy.gif')
         wpercent = (basewidth/float(buf.size[0]))
         hsize = int((float(buf.size[1])*float(wpercent)))
         buf = buf.resize((basewidth,hsize), Image.ANTIALIAS)
