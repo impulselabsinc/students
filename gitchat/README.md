@@ -29,6 +29,9 @@ Only the following emotions are supported for now -
 - shrug
 - smile
 
+![Image of Gitchat](https://impulselabsinc.github.io/img/gitchat.png)
+
+
 ```
 # Requires watchdog
 sudo pip install watchdog
