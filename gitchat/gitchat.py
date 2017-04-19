@@ -19,7 +19,7 @@ class CustomHandler(FileSystemEventHandler):
         if event.is_directory:
             return None
         else:
-            return None
+            app.notify(event)
         
         
     def on_deleted(self, event):
@@ -51,6 +51,7 @@ class App(object):
         self.observer = Observer()
         self.observer.schedule(handler, path, recursive=False)
         self.lineNumber = 0
+        self.previousLine = ""
 
         self.queue = Queue()
         self.root = tk.Tk()
@@ -117,71 +118,75 @@ class App(object):
             f.close()
             self.text.config(state=tk.NORMAL)
             for line in lines:
-                parts = line.split(":")
-                if len(parts) == 3:
-                    myName = parts[0].strip()
-                    myMsg = parts[1].strip()
-                    myTag = parts[2].strip().lower()
-                elif len(parts) == 2:
-                    myName = parts[0]
-                    myMsg = parts[1]
-                    myTag = "white"
-                elif len(parts) == 1:
-                    myName = "no name"
-                    myMsg = parts[0]
-                    myTag = "white"
+                if self.previousLine == line:
+                    return None
                 else:
-                    myName = "no name"
-                    myMsg = line
-                    myTag = "white"
+                    self.previousLine = line
+                    parts = line.split(":")
+                    if len(parts) == 3:
+                        myName = parts[0].strip()
+                        myMsg = parts[1].strip()
+                        myTag = parts[2].strip().lower()
+                    elif len(parts) == 2:
+                        myName = parts[0]
+                        myMsg = parts[1]
+                        myTag = "white"
+                    elif len(parts) == 1:
+                        myName = "no name"
+                        myMsg = parts[0]
+                        myTag = "white"
+                    else:
+                        myName = "no name"
+                        myMsg = line
+                        myTag = "white"
 
-                rainbowColors = []
-                rainbowColors.append("yellow")
-                rainbowColors.append("green")
-                rainbowColors.append("blue")
-                rainbowColors.append("orange")
-                rainbowColors.append("pink")
-                rainbowColors.append("cyan")
-                rainbowColors.append("brown")
-                rainbowColors.append("aquamarine")
-                rainbowColors.append("purple")
-                rainbowColors.append("honeydew")
+                    rainbowColors = []
+                    rainbowColors.append("yellow")
+                    rainbowColors.append("green")
+                    rainbowColors.append("blue")
+                    rainbowColors.append("orange")
+                    rainbowColors.append("pink")
+                    rainbowColors.append("cyan")
+                    rainbowColors.append("brown")
+                    rainbowColors.append("aquamarine")
+                    rainbowColors.append("purple")
+                    rainbowColors.append("honeydew")
+                        
+                    self.lineNumber = self.lineNumber + 1
                     
-                self.lineNumber = self.lineNumber + 1
-                
-                
-                if myTag == "white" or myTag == "yellow" or myTag == "green" or myTag == "blue" or myTag == "orange" or myTag == "pink" or myTag == "cyan" or myTag == "brown" or myTag == "aquamarine" or myTag == "purple" or myTag == "honeydew":
-                    self.text.insert("end", myName + " > " + myMsg + "\n")
-                    self.text.tag_add(myTag, str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(len(myName)))
-                elif myTag == "rainbow":
-                    self.text.insert("end", myName + " > " + myMsg + "\n")
-                    nameLen = len(myName)
-                    self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
-                    idx = 0
-                    for character in range(nameLen + 3, len(myMsg) + nameLen, 5):
-                        mycolor = rainbowColors[idx]
-                        idx = (idx + 1) % len(rainbowColors)
-                            
-                        self.text.tag_add(mycolor, str(self.lineNumber) + "." + str(character), str(self.lineNumber) + "." + str(character + 7))
-                elif myTag == "secret":
-                    self.text.insert("end", myName + " > " + myMsg + " <---***Secret Message***" + "\n")
-                    nameLen = len(myName)
-                    self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
-                    self.text.tag_add("secret", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
-                    self.text.tag_add("red", str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3 + 1), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3 + 24))
-                elif myTag == "papaya":
-                    self.text.insert("end", myName + " > " + myMsg + "\n")
-                    nameLen = len(myName)
-                    self.text.tag_add("orange", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
-                    self.text.tag_add("yellow", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
-                elif myTag == "pastel":
-                    self.text.insert("end", myName + " > " + myMsg + "\n")
-                    nameLen = len(myName)
-                    self.text.tag_add("pink", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
-                    self.text.tag_add("aquamarine", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
-                else:
-                    self.text.insert("end", myName + " > " + myMsg + "\n")
-                    self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(len(myName)))
+                    
+                    if myTag == "white" or myTag == "yellow" or myTag == "green" or myTag == "blue" or myTag == "orange" or myTag == "pink" or myTag == "cyan" or myTag == "brown" or myTag == "aquamarine" or myTag == "purple" or myTag == "honeydew":
+                        self.text.insert("end", myName + " > " + myMsg + "\n")
+                        self.text.tag_add(myTag, str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(len(myName)))
+                    elif myTag == "rainbow":
+                        self.text.insert("end", myName + " > " + myMsg + "\n")
+                        nameLen = len(myName)
+                        self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
+                        idx = 0
+                        for character in range(nameLen + 3, len(myMsg) + nameLen, 5):
+                            mycolor = rainbowColors[idx]
+                            idx = (idx + 1) % len(rainbowColors)
+                                
+                            self.text.tag_add(mycolor, str(self.lineNumber) + "." + str(character), str(self.lineNumber) + "." + str(character + 7))
+                    elif myTag == "secret":
+                        self.text.insert("end", myName + " > " + myMsg + " <---***Secret Message***" + "\n")
+                        nameLen = len(myName)
+                        self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
+                        self.text.tag_add("secret", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
+                        self.text.tag_add("red", str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3 + 1), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3 + 24))
+                    elif myTag == "papaya":
+                        self.text.insert("end", myName + " > " + myMsg + "\n")
+                        nameLen = len(myName)
+                        self.text.tag_add("orange", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
+                        self.text.tag_add("yellow", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
+                    elif myTag == "pastel":
+                        self.text.insert("end", myName + " > " + myMsg + "\n")
+                        nameLen = len(myName)
+                        self.text.tag_add("pink", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
+                        self.text.tag_add("aquamarine", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
+                    else:
+                        self.text.insert("end", myName + " > " + myMsg + "\n")
+                        self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(len(myName)))
 
         self.text.config(state=tk.DISABLED)
                             
