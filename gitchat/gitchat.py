@@ -86,10 +86,10 @@ class App(object):
         self.text.tag_config("rainbow_violet", background="#9400D3", foreground="white")
         self.text.tag_config("rainbow_indigo", background="#4B0082", foreground="pink")
         self.text.tag_config("rainbow_blue", background="#0000FF", foreground="yellow")
-        self.text.tag_config("rainbow_green", background="#00FF00", foreground="purple")
+        self.text.tag_config("rainbow_green", background="#00FF00", foreground="blue")
         self.text.tag_config("rainbow_yellow", background="#FFFF00", foreground="brown")
-        self.text.tag_config("rainbow_orange", background="#FF7F00", foreground="cyan")
-        self.text.tag_config("rainbow_red", background="#FF0000", foreground="white")
+        self.text.tag_config("rainbow_orange", background="#FF7F00", foreground="white")
+        self.text.tag_config("rainbow_red", background="#FF0000", foreground="yellow")
 
         self.shrug = """¯\_(ツ)_/¯"""
         self.smile = """【ツ】"""
@@ -179,17 +179,6 @@ class App(object):
                         myTag = "white"
 
                     rainbowColors = []
-    ##                    rainbowColors.append("yellow")
-    ##                    rainbowColors.append("green")
-    ##                    rainbowColors.append("blue")
-    ##                    rainbowColors.append("orange")
-    ##                    rainbowColors.append("pink")
-    ##                    rainbowColors.append("cyan")
-    ##                    rainbowColors.append("brown")
-    ##                    rainbowColors.append("aquamarine")
-    ##                    rainbowColors.append("purple")
-    ##                    rainbowColors.append("honeydew")
-
                     rainbowColors.append("rainbow_violet")
                     rainbowColors.append("rainbow_indigo")
                     rainbowColors.append("rainbow_blue")
@@ -279,7 +268,6 @@ class App(object):
 
     def onExit(self):
         self.quit()
-
 
     def About(self):
         print "This is a simple example of a menu"
