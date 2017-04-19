@@ -1,6 +1,6 @@
-
-
 # -*- coding: utf-8 -*-
+
+
 import Tkinter as tk
 from tkFont import Font
 from watchdog.observers import Observer
@@ -8,6 +8,7 @@ from watchdog.events import FileSystemEventHandler
 
 from Queue import Queue
 import sys
+from PIL import Image, ImageTk
 
 class CustomHandler(FileSystemEventHandler):
     def __init__(self, app):
@@ -52,12 +53,14 @@ class App(object):
         self.observer.schedule(handler, path, recursive=False)
         self.lineNumber = 0
         self.previousLine = ""
+        self.previousFile = []
 
         self.queue = Queue()
         self.root = tk.Tk()
 
         self.initMenu()
         self.initUi(path)
+        self.initImages()
         self.observer.start()
 
     def initUi(self, path):
@@ -88,6 +91,8 @@ class App(object):
         self.text.tag_config("rainbow_orange", background="#FF7F00", foreground="cyan")
         self.text.tag_config("rainbow_red", background="#FF0000", foreground="white")
 
+        self.shrug = """¯\_(ツ)_/¯"""
+        self.smile = """【ツ】"""
         
         self.text.pack(fill="both", expand=True)
 
@@ -103,6 +108,31 @@ class App(object):
         self.root.bind("<Destroy>", self.shutdown)
         self.root.bind("<<WatchdogEvent>>", self.handle_watchdog_event)
 
+    def initImages(self):
+        self.images = {}
+        
+        basewidth = 32
+        buf = Image.open('./messages/emojis/creeper.gif')
+        wpercent = (basewidth/float(buf.size[0]))
+        hsize = int((float(buf.size[1])*float(wpercent)))
+        buf = buf.resize((basewidth,hsize), Image.ANTIALIAS)
+        self.images['creeper'] = ImageTk.PhotoImage(buf)
+
+        basewidth = 32
+        buf = Image.open('./messages/emojis/poo.gif')
+        wpercent = (basewidth/float(buf.size[0]))
+        hsize = int((float(buf.size[1])*float(wpercent)))
+        buf = buf.resize((basewidth,hsize), Image.ANTIALIAS)
+        self.images['poo'] = ImageTk.PhotoImage(buf)
+
+        basewidth = 32
+        buf = Image.open('./messages/emojis/happy.gif')
+        wpercent = (basewidth/float(buf.size[0]))
+        hsize = int((float(buf.size[1])*float(wpercent)))
+        buf = buf.resize((basewidth,hsize), Image.ANTIALIAS)
+        self.images['happy'] = ImageTk.PhotoImage(buf)
+
+        
     def initMenu(self):
         self.root.title("Gitchat-py")
         
@@ -125,40 +155,40 @@ class App(object):
             lines = f.readlines()
             f.close()
             self.text.config(state=tk.NORMAL)
-            for line in lines:
-                if self.previousLine == line:
-                    return None
-                else:
-                    self.previousLine = line
+            if self.previousFile == lines:
+                return None
+            else:
+                self.previousFile = lines
+                for line in lines:
                     parts = line.split(":")
                     if len(parts) == 3:
                         myName = parts[0].strip()
                         myMsg = parts[1].strip()
                         myTag = parts[2].strip().lower()
                     elif len(parts) == 2:
-                        myName = parts[0]
-                        myMsg = parts[1]
+                        myName = parts[0].strip()
+                        myMsg = parts[1].strip()
                         myTag = "white"
                     elif len(parts) == 1:
-                        myName = "no name"
-                        myMsg = parts[0]
+                        myName = "poopsie lala"
+                        myMsg = parts[0].strip()
                         myTag = "white"
                     else:
-                        myName = "no name"
-                        myMsg = line
+                        myName = "poopsie lala"
+                        myMsg = line.strip()
                         myTag = "white"
 
                     rainbowColors = []
-##                    rainbowColors.append("yellow")
-##                    rainbowColors.append("green")
-##                    rainbowColors.append("blue")
-##                    rainbowColors.append("orange")
-##                    rainbowColors.append("pink")
-##                    rainbowColors.append("cyan")
-##                    rainbowColors.append("brown")
-##                    rainbowColors.append("aquamarine")
-##                    rainbowColors.append("purple")
-##                    rainbowColors.append("honeydew")
+    ##                    rainbowColors.append("yellow")
+    ##                    rainbowColors.append("green")
+    ##                    rainbowColors.append("blue")
+    ##                    rainbowColors.append("orange")
+    ##                    rainbowColors.append("pink")
+    ##                    rainbowColors.append("cyan")
+    ##                    rainbowColors.append("brown")
+    ##                    rainbowColors.append("aquamarine")
+    ##                    rainbowColors.append("purple")
+    ##                    rainbowColors.append("honeydew")
 
                     rainbowColors.append("rainbow_violet")
                     rainbowColors.append("rainbow_indigo")
@@ -168,40 +198,64 @@ class App(object):
                     rainbowColors.append("rainbow_orange")
                     rainbowColors.append("rainbow_red")
                     
-                        
-                    self.lineNumber = self.lineNumber + 1
-                    
                     
                     if myTag == "white" or myTag == "yellow" or myTag == "green" or myTag == "blue" or myTag == "orange" or myTag == "pink" or myTag == "cyan" or myTag == "brown" or myTag == "aquamarine" or myTag == "purple" or myTag == "honeydew":
+                        self.lineNumber = self.lineNumber + 1
                         self.text.insert("end", myName + " > " + myMsg + "\n")
                         self.text.tag_add(myTag, str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(len(myName)))
+                                           
                     elif myTag == "rainbow":
+                        self.lineNumber = self.lineNumber + 1
                         self.text.insert("end", myName + " > " + myMsg + "\n")
                         nameLen = len(myName)
                         self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
                         idx = 0
                         for character in range(nameLen + 3, len(myMsg) + nameLen, 5):
                             mycolor = rainbowColors[idx]
-                            idx = (idx + 1) % len(rainbowColors)
-                                
+                            idx = (idx + 1) % len(rainbowColors)                               
                             self.text.tag_add(mycolor, str(self.lineNumber) + "." + str(character), str(self.lineNumber) + "." + str(character + 7))
                     elif myTag == "secret":
+                        self.lineNumber = self.lineNumber + 1
                         self.text.insert("end", myName + " > " + myMsg + " <---***Secret Message***" + "\n")
                         nameLen = len(myName)
                         self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
                         self.text.tag_add("secret", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
                         self.text.tag_add("red", str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3 + 1), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3 + 24))
                     elif myTag == "papaya":
+                        self.lineNumber = self.lineNumber + 1
                         self.text.insert("end", myName + " > " + myMsg + "\n")
                         nameLen = len(myName)
                         self.text.tag_add("orange", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
                         self.text.tag_add("yellow", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
                     elif myTag == "pastel":
+                        self.lineNumber = self.lineNumber + 1
                         self.text.insert("end", myName + " > " + myMsg + "\n")
                         nameLen = len(myName)
                         self.text.tag_add("pink", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
                         self.text.tag_add("aquamarine", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
+                    elif myTag == "shrug":
+                        self.lineNumber = self.lineNumber + 3
+                        self.text.insert("end", "\n" + myName + " > " + self.shrug + "\n\n")
+                    elif myTag == "smile":
+                        self.lineNumber = self.lineNumber + 3
+                        self.text.insert("end", "\n" + myName + " > " + self.smile + "\n\n")
+                    elif myTag == "creeper":
+                        self.lineNumber = self.lineNumber + 3
+                        self.text.insert("end", "\n" + myName + " > ")
+                        self.text.image_create(tk.END,image=self.images['creeper'])
+                        self.text.insert("end", "\n\n")
+                    elif myTag == "happy":
+                        self.lineNumber = self.lineNumber + 3
+                        self.text.insert("end", "\n" + myName + " > ")
+                        self.text.image_create(tk.END,image=self.images['happy'])
+                        self.text.insert("end", "\n\n")
+                    elif myTag == "poo":
+                        self.lineNumber = self.lineNumber + 3
+                        self.text.insert("end", "\n" + myName + " > ")
+                        self.text.image_create(tk.END,image=self.images['poo'])
+                        self.text.insert("end", "\n\n")
                     else:
+                        self.lineNumber = self.lineNumber + 1
                         self.text.insert("end", myName + " > " + myMsg + "\n")
                         self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(len(myName)))
 
