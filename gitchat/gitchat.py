@@ -1,3 +1,5 @@
+
+
 # -*- coding: utf-8 -*-
 import Tkinter as tk
 from tkFont import Font
@@ -17,7 +19,7 @@ class CustomHandler(FileSystemEventHandler):
         if event.is_directory:
             return None
         else:
-            app.notify(event)
+            return None
         
         
     def on_deleted(self, event):
@@ -31,7 +33,7 @@ class CustomHandler(FileSystemEventHandler):
         if event.is_directory:
             return None
         else:
-            return None
+            app.notify(event)
         
         
     def on_moved(self, event):
@@ -177,6 +179,9 @@ class App(object):
                     nameLen = len(myName)
                     self.text.tag_add("pink", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
                     self.text.tag_add("aquamarine", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
+                else:
+                    self.text.insert("end", myName + " > " + myMsg + "\n")
+                    self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(len(myName)))
 
         self.text.config(state=tk.DISABLED)
                             
