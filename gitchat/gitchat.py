@@ -119,7 +119,6 @@ class App(object):
         self.text.tag_config("aquamarine", background="aquamarine", foreground="black")
         self.text.tag_config("purple", background="purple", foreground="cyan")
         self.text.tag_config("honeydew", background="honeydew", foreground="brown")
-        
         self.text.tag_config("rainbow_violet", background="#9400D3", foreground="white")
         self.text.tag_config("rainbow_indigo", background="#4B0082", foreground="pink")
         self.text.tag_config("rainbow_blue", background="#0000FF", foreground="yellow")
@@ -128,7 +127,26 @@ class App(object):
         self.text.tag_config("rainbow_orange", background="#FF7F00", foreground="white")
         self.text.tag_config("rainbow_red", background="#FF0000", foreground="yellow")
 
-        
+        self.allowed_tag_colors = {}
+        self.allowed_tag_colors['white'] = 'white'
+        self.allowed_tag_colors['yellow'] = 'yellow'
+        self.allowed_tag_colors['green'] = 'green'
+        self.allowed_tag_colors['blue'] = 'blue'
+        self.allowed_tag_colors['orange'] = 'orange'
+        self.allowed_tag_colors['pink'] = 'pink'
+        self.allowed_tag_colors['cyan'] = 'cyan'
+        self.allowed_tag_colors['brown'] = 'brown'
+        self.allowed_tag_colors['aquamarine'] = 'aquamarine'
+        self.allowed_tag_colors['purple'] = 'purple'
+        self.allowed_tag_colors['honeydew'] = 'honeydew'
+        self.allowed_tag_colors['rainbow_violet'] = 'rainbow_violet'
+        self.allowed_tag_colors['rainbow_indigo'] = 'rainbow_indigo'
+        self.allowed_tag_colors['rainbow_blue'] = 'rainbow_blue'
+        self.allowed_tag_colors['rainbow_green'] = 'rainbow_green'
+        self.allowed_tag_colors['rainbow_yellow'] = 'rainbow_yellow'
+        self.allowed_tag_colors['rainbow_orange'] = 'rainbow_orange'
+        self.allowed_tag_colors['rainbow_red'] = 'rainbow_red'
+
         
         self.text.pack(fill="both", expand=True)
 
@@ -168,6 +186,9 @@ class App(object):
         buf = buf.resize((basewidth,hsize), Image.ANTIALIAS)
         self.emojicons['happy'] = ImageTk.PhotoImage(buf)
 
+        self.textemoji = {}
+        self.textemoji['shrug'] = """¯\_(ツ)_/¯"""
+        self.textemoji['smile'] = """【ツ】"""
         self.shrug = """¯\_(ツ)_/¯"""
         self.smile = """【ツ】"""
 
@@ -231,7 +252,7 @@ class App(object):
                     rainbowColors.append("rainbow_red")
                     
                     
-                    if myTag == "white" or myTag == "yellow" or myTag == "green" or myTag == "blue" or myTag == "orange" or myTag == "pink" or myTag == "cyan" or myTag == "brown" or myTag == "aquamarine" or myTag == "purple" or myTag == "honeydew":
+                    if myTag in self.allowed_tag_colors:
                         self.lineNumber = self.lineNumber + 1
                         self.text.insert("end", myName + " > " + myMsg + "\n")
                         self.text.tag_add(myTag, str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(len(myName)))
@@ -265,12 +286,9 @@ class App(object):
                         nameLen = len(myName)
                         self.text.tag_add("pink", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(nameLen))
                         self.text.tag_add("aquamarine", str(self.lineNumber) + "." + str(nameLen + 3), str(self.lineNumber) + "." + str(len(myMsg) + nameLen + 3))
-                    elif myTag == "shrug":
+                    elif myTag in self.textemoji:
                         self.lineNumber = self.lineNumber + 3
-                        self.text.insert("end", "\n" + myName + " > " + self.shrug + "\n\n")
-                    elif myTag == "smile":
-                        self.lineNumber = self.lineNumber + 3
-                        self.text.insert("end", "\n" + myName + " > " + self.smile + "\n\n")
+                        self.text.insert("end", "\n" + myName + " > " + self.textemoji[myTag] + "\n\n")
                     elif myTag in self.emojicons:
                         self.lineNumber = self.lineNumber + 3
                         self.text.insert("end", "\n" + myName + " > ")
@@ -280,9 +298,9 @@ class App(object):
                         self.lineNumber = self.lineNumber + 1
                         self.text.insert("end", myName + " > " + myMsg + "\n")
                         self.text.tag_add("white", str(self.lineNumber) + ".0", str(self.lineNumber) + "." + str(len(myName)))
-
+                    self.text.see(tk.END)
+                    
         self.text.config(state=tk.DISABLED)
-                            
 
 
     def shutdown(self, event):
@@ -359,7 +377,6 @@ class App(object):
         receive_message = receive_message + "     cd gitchat\n"
         receive_message = receive_message + "     cd messages\n"
         receive_message = receive_message + "     git pull\n"
- 
 
         self.top = tk.Toplevel()
         self.top.geometry("600x200")
