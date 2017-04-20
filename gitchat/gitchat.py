@@ -102,8 +102,11 @@ class App(object):
 
     def initUi(self, path):
         myFont = Font(family="Helvetica", size=14)
+
+        self.scrollbar = tk.Scrollbar(self.root)
+        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         
-        self.text = tk.Text(self.root)
+        self.text = tk.Text(self.root, yscrollcommand=self.scrollbar.set)
         self.text.configure(font=myFont)
         self.text.tag_config("secret", background="white", foreground="white")
         self.text.tag_config("white", background="white", foreground="black")
@@ -149,6 +152,7 @@ class App(object):
 
         
         self.text.pack(fill="both", expand=True)
+        self.scrollbar.config(command=self.text.yview)
 
         self.welcomeMsg = " " * 50 + "Welcome to Gitchat" + " " * 50
         self.lineNumber = self.lineNumber + 1
