@@ -101,13 +101,20 @@ class App(object):
         self.observer.start()
 
     def initUi(self, path):
-        myFont = Font(family="Helvetica", size=14)
-
-        self.scrollbar = tk.Scrollbar(self.root)
-        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         
-        self.text = tk.Text(self.root, yscrollcommand=self.scrollbar.set)
+
+        self.xscrollbar = tk.Scrollbar(self.root, orient=tk.HORIZONTAL)
+        self.xscrollbar.pack(side=tk.BOTTOM, fill=tk.X)
+        self.yscrollbar = tk.Scrollbar(self.root)
+        self.yscrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        
+        self.text = tk.Text(self.root,wrap=tk.NONE,
+                            xscrollcommand=self.xscrollbar.set,
+                            yscrollcommand=self.yscrollbar.set)
+        
+        myFont = Font(family="Helvetica", size=14)
         self.text.configure(font=myFont)
+        
         self.text.tag_config("secret", background="white", foreground="white")
         self.text.tag_config("white", background="white", foreground="black")
         self.text.tag_config("black", background="black", foreground="white")
@@ -152,7 +159,8 @@ class App(object):
 
         
         self.text.pack(fill="both", expand=True)
-        self.scrollbar.config(command=self.text.yview)
+        self.xscrollbar.config(command=self.text.xview)
+        self.yscrollbar.config(command=self.text.yview)
 
         self.welcomeMsg = " " * 50 + "Welcome to Gitchat" + " " * 50
         self.lineNumber = self.lineNumber + 1
