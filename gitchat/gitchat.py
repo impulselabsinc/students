@@ -119,7 +119,7 @@ class App(object):
         self.text.tag_config("aquamarine", background="aquamarine", foreground="black")
         self.text.tag_config("purple", background="purple", foreground="cyan")
         self.text.tag_config("honeydew", background="honeydew", foreground="brown")
-
+        
         self.text.tag_config("rainbow_violet", background="#9400D3", foreground="white")
         self.text.tag_config("rainbow_indigo", background="#4B0082", foreground="pink")
         self.text.tag_config("rainbow_blue", background="#0000FF", foreground="yellow")
@@ -128,8 +128,7 @@ class App(object):
         self.text.tag_config("rainbow_orange", background="#FF7F00", foreground="white")
         self.text.tag_config("rainbow_red", background="#FF0000", foreground="yellow")
 
-        self.shrug = """¯\_(ツ)_/¯"""
-        self.smile = """【ツ】"""
+        
         
         self.text.pack(fill="both", expand=True)
 
@@ -146,28 +145,31 @@ class App(object):
         self.root.bind("<<WatchdogEvent>>", self.handle_watchdog_event)
 
     def initImages(self):
-        self.images = {}
+        self.emojicons = {}
         
         basewidth = 32
         buf = Image.open('./emojis/creeper.gif')
         wpercent = (basewidth/float(buf.size[0]))
         hsize = int((float(buf.size[1])*float(wpercent)))
         buf = buf.resize((basewidth,hsize), Image.ANTIALIAS)
-        self.images['creeper'] = ImageTk.PhotoImage(buf)
+        self.emojicons['creeper'] = ImageTk.PhotoImage(buf)
 
         basewidth = 32
         buf = Image.open('./emojis/poo.gif')
         wpercent = (basewidth/float(buf.size[0]))
         hsize = int((float(buf.size[1])*float(wpercent)))
         buf = buf.resize((basewidth,hsize), Image.ANTIALIAS)
-        self.images['poo'] = ImageTk.PhotoImage(buf)
+        self.emojicons['poo'] = ImageTk.PhotoImage(buf)
 
         basewidth = 32
         buf = Image.open('./emojis/happy.gif')
         wpercent = (basewidth/float(buf.size[0]))
         hsize = int((float(buf.size[1])*float(wpercent)))
         buf = buf.resize((basewidth,hsize), Image.ANTIALIAS)
-        self.images['happy'] = ImageTk.PhotoImage(buf)
+        self.emojicons['happy'] = ImageTk.PhotoImage(buf)
+
+        self.shrug = """¯\_(ツ)_/¯"""
+        self.smile = """【ツ】"""
 
         
     def initMenu(self):
@@ -269,20 +271,10 @@ class App(object):
                     elif myTag == "smile":
                         self.lineNumber = self.lineNumber + 3
                         self.text.insert("end", "\n" + myName + " > " + self.smile + "\n\n")
-                    elif myTag == "creeper":
+                    elif myTag in self.emojicons:
                         self.lineNumber = self.lineNumber + 3
                         self.text.insert("end", "\n" + myName + " > ")
-                        self.text.image_create(tk.END,image=self.images['creeper'])
-                        self.text.insert("end", "\n\n")
-                    elif myTag == "happy":
-                        self.lineNumber = self.lineNumber + 3
-                        self.text.insert("end", "\n" + myName + " > ")
-                        self.text.image_create(tk.END,image=self.images['happy'])
-                        self.text.insert("end", "\n\n")
-                    elif myTag == "poo":
-                        self.lineNumber = self.lineNumber + 3
-                        self.text.insert("end", "\n" + myName + " > ")
-                        self.text.image_create(tk.END,image=self.images['poo'])
+                        self.text.image_create(tk.END,image=self.emojicons[myTag])
                         self.text.insert("end", "\n\n")
                     else:
                         self.lineNumber = self.lineNumber + 1
