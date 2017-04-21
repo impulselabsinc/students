@@ -45,11 +45,9 @@ import ttk as ttk
 import lib.menu as menu
 import lib.chatFrame as chatframe
 import lib.minecraftFrame as minecraftframe
-from tkFont import Font
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from Queue import Queue
-import pprint
 
 
 class CustomHandler(FileSystemEventHandler):
