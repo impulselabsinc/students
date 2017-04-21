@@ -18,7 +18,7 @@ class MinecraftFrame(ttk.Frame):
 
         localIpAddr = 'Only works on Linux'
         try:
-            localIpAddr = ni.ifaddresses('en0')[AF_INET][0]['addr']
+            localIpAddr = ni.ifaddresses('wlan0')[AF_INET][0]['addr']
         except Exception, e:
             pass
 
