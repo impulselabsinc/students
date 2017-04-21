@@ -31,6 +31,7 @@ Only the following emotions are supported for now -
 
 ![Image of Gitchat](https://impulselabsinc.github.io/img/gitchat.png)
 
+![Image of Gitchat Minecraft](https://impulselabsinc.github.io/img/gitchatmc.png)
 
 ```
 # Requires watchdog
