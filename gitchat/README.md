@@ -6,6 +6,7 @@ This app allows students to send messages to each other via git push and git pul
 This app has two tabs called 'chat' and 'minecraft'. Students can change the behaviour of both tabs through code in a variety of ways - 
 - change the layout
 - add tags that allow the text to be formatted differently 
+- add their own emojis
 - add minecraft controls
 - change the layout of the GUI
 
