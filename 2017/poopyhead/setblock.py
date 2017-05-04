@@ -13,4 +13,4 @@ starty = pos.y + 2
 startz = pos.z
 
 myBlock = block.BOOKSHELF
-mc.setBlock(x, y, z, myBlock)
+mc.setBlock(startx, starty, startz, myBlock)
