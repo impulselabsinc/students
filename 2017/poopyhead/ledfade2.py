@@ -11,7 +11,7 @@ GPIO.setup(LED_PIN, GPIO.OUT)
 pause_interval = 0.02
 intensity = DUTY_CYCLE_MIN
 increasing = True
-increment = 5
+increment = 3
 
 led = GPIO.PWM(LED_PIN, 100)
 led.start(intensity)
@@ -28,10 +28,10 @@ try:
             time.sleep(pause_interval)
             led.ChangeDutyCycle(intensity)
 
-        if (intensity == DUTY_CYCLE_MIN):
+        if (intensity < DUTY_CYCLE_MIN + increment):
             increasing = True
 
-        if (intensity == DUTY_CYCLE_MAX):
+        if (intensity > DUTY_CYCLE_MAX - increment):
             increasing = False
 
         print intensity
