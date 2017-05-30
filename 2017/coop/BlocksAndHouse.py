@@ -20,7 +20,7 @@ currentPosition = mc.player.getTilePos()
 
 
 
-#mc.setBlock(  currentPosition.x,  currentPosition.y+10  ,  currentPosition.z  ,  block.WATER_FLOWING.id  )
+mc.setBlock(  currentPosition.x,  currentPosition.y+10  ,  currentPosition.z  ,  block.WATER_FLOWING.id  )
 #UNCOMMENT THE  LINE ABOVE THIS (DELETE THE HASHTAG)
 
 #What part of the code affects what block is being placed?

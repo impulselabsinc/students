@@ -1,11 +1,13 @@
-import mcpi.minecraft as minecraft
-import mcpi.block as block
+import mcpi.minecraft
+import time
 
-mc = minecraft.Minecraft.create()
-myblock = block.GOLD_ORE
-pos = mc.player.getTilePos()
-x = pos.x + 1
-y = pos.y
-z = pos.z + 1
+mc = mcpi.minecraft.Minecraft.create();
 
-mc.setBlocks(x, y, z, x+11, y+11, z+11, myblock)
+while True:
+    hits = mc.events.pollBlockHits()
+    for hit in hits:
+        block = mc.getBlockWithData(hit.pos.x,hit.pos.y,hit.pos.z);
+        block.data = (block.data + 1) & 0xf;
+        mc.setBlock(hit.pos.x,hit.pos.y,hit.pos.z, block.id, block.data)
+        mc.postToChat("Block data is now" + str(block.data))
+        time.sleep(0.1)
